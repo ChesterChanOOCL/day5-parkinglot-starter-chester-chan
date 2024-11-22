@@ -5,43 +5,56 @@ import java.util.Map;
 
 public class ParkingLot {
     private int capacity ;
-    private Map<Ticket,Car> ticketToCar;
+    private Map<Ticket,Car> parkRecord;
     private int availablePosition;
-     ParkingLot() {
+    final int parkingLotID;
+
+    public ParkingLot(int parkingLotID) {
         this.capacity = 3; ;
         this.availablePosition = 10;
-        this.ticketToCar = new HashMap<>();
+        this.parkRecord = new HashMap<>();
+        this.parkingLotID = parkingLotID;
     }
 
-
+    public int getParkingLotID() {
+        return parkingLotID;
+    }
 
     public Ticket park(Car car) {
         if (!this.isFull()) {
-            Ticket ticket = new Ticket();
-            ticketToCar.put(ticket, car);
+            Ticket ticket = new Ticket(this.parkingLotID);
+            parkRecord.put(ticket, car);
             availablePosition--;
+
             return ticket;
         }
 
         throw new ParkingLotFullException("No available position");
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
 
     public Car fetch(Ticket ticket) {
-        if (ticketToCar.get(ticket) == null) {
+        if (parkRecord.get(ticket) == null) {
             throw new UnrecognizedTicketException("Unrecognized parking ticket.");
         }
-        Car obtainedCar =  ticketToCar.get(ticket);
-        ticketToCar.remove(ticket);
+        Car obtainedCar =  parkRecord.get(ticket);
+        parkRecord.remove(ticket);
         return obtainedCar;
     }
 
-    public Map<Ticket, Car> getTicketToCar() {
-        return ticketToCar;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
-    public void setTicketToCar(Map<Ticket, Car> ticketToCar) {
-        this.ticketToCar = ticketToCar;
+    public Map<Ticket, Car> getParkRecord() {
+        return parkRecord;
+    }
+
+    public void setParkRecord(Map<Ticket, Car> parkRecord) {
+        this.parkRecord = parkRecord;
     }
 
     public int getAvailablePosition() {
@@ -53,7 +66,7 @@ public class ParkingLot {
     }
 
     public boolean isFull() {
-        if (ticketToCar.size() >= capacity) {
+        if (parkRecord.size() >= capacity) {
             return true;
         }
         return false;
