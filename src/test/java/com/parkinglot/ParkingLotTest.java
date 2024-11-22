@@ -95,13 +95,28 @@ public class ParkingLotTest {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
-        Ticket ticket1 = parkingLot.park(car1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
         //When
-        
+        Ticket ticket = parkingBoy.park(car1);
         //Return
-        
+        Assertions.assertNotNull(ticket);
     }
+    @Test
+    void should_return_a_car_when_fetch_a_car_given_a_parkingLot_And_a_parkingBoy_And_a_ticket(){
+        // Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Ticket ticket = parkingBoy.park(car1);
+
+        //When
+        Car fetchedCar = parkingBoy.fetch(ticket);
+        //Return
+        Assertions.assertEquals(car1, fetchedCar);
+
+    }
+
+
        
 }
