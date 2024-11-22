@@ -28,10 +28,14 @@ public class ParkingLot {
 
 
     public Car fetch(Ticket ticket) {
+        if (ticketToCar.get(ticket) == null) {
+            throw new UnrecognizedTicketException("Unrecognized parking ticket.");
+        }
         Car obtainedCar =  ticketToCar.get(ticket);
         ticketToCar.remove(ticket);
         return obtainedCar;
     }
+
     public boolean isFull() {
         if (ticketToCar.size() >= capacity) {
             return true;

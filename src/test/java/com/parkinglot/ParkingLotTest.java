@@ -71,10 +71,7 @@ public class ParkingLotTest {
         Ticket ticket1 = parkingLot.park(car1);
         //When
         Car fetchedCar1 = parkingLot.fetch(ticket1);
-        Car fetchAgain = parkingLot.fetch(ticket1);
-        Assertions.assertNull(fetchAgain);
-
-
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetch(ticket1), "Unrecognized parking ticket.");
     }
     @Test
     public void should_return_null_when_parking_a_car_given_the_car_park_is_full(){
@@ -90,4 +87,21 @@ public class ParkingLotTest {
     private String systemOut() {
         return outContent.toString();
     }
+    
+    
+    
+    @Test
+    void should_return_a_ticket_when_park_a_car_given_a_parkingLot_And_a_parkingBoy(){
+        // Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car();
+        Ticket ticket1 = parkingLot.park(car1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        //When
+        
+        //Return
+        
+    }
+       
 }
