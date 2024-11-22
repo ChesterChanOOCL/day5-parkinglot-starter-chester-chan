@@ -36,6 +36,22 @@ public class ParkingLot {
         return obtainedCar;
     }
 
+    public Map<Ticket, Car> getTicketToCar() {
+        return ticketToCar;
+    }
+
+    public void setTicketToCar(Map<Ticket, Car> ticketToCar) {
+        this.ticketToCar = ticketToCar;
+    }
+
+    public int getAvailablePosition() {
+        return availablePosition;
+    }
+
+    public void setAvailablePosition(int availablePosition) {
+        this.availablePosition = availablePosition;
+    }
+
     public boolean isFull() {
         if (ticketToCar.size() >= capacity) {
             return true;
