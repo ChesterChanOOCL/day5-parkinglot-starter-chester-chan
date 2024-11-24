@@ -247,8 +247,8 @@ public class ParkingLotTest {
     @Test
     void should_park_in_second_lot_when_it_has_more_empty_positions() {
         SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
-        ParkingLot lot1 = new ParkingLot(1);
-        ParkingLot lot2 = new ParkingLot(2);
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(1);
         smartParkingBoy.getParkingLotList().add(lot1);
         smartParkingBoy.getParkingLotList().add(lot2);
 
@@ -258,6 +258,23 @@ public class ParkingLotTest {
 
         assertFalse(lot1.getParkRecord().containsKey(ticket));
         assertTrue(lot2.getParkRecord().containsKey(ticket));
+    }
+
+    @Test
+    void should_return_right_car_with_each_ticket_when_fetch_car_given_2_parking_lot_And_2_ticket() {
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(1);
+        smartParkingBoy.getParkingLotList().add(lot1);
+        smartParkingBoy.getParkingLotList().add(lot2);
+
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Ticket ticket1 = smartParkingBoy.park(car1);
+        Ticket ticket2 = smartParkingBoy.park(car2);
+
+        assertEquals(car1, smartParkingBoy.fetch(ticket1));
+        assertEquals(car2, smartParkingBoy.fetch(ticket2));
     }
 
 
