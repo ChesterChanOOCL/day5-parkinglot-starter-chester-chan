@@ -188,9 +188,8 @@ public class ParkingLotTest {
         //When
         Car fetchedCar1 = parkingBoy.fetch(ticket1);
 
-        System.out.println(fetchedCar1);
         // Then
-//        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(ticket1), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(ticket1), "Unrecognized parking ticket.");
     }
     @Test
     public void should_return_null_when_parking_a_car_given_the_car_park_is_full_and_a_parking_boy(){
@@ -219,5 +218,16 @@ public class ParkingLotTest {
         Ticket ticket = parkingBoy.park(car);
         //Return
         assertNotNull(ticket);
+    }
+    @Test
+    public void should_return_FULL_errorMsg_when_parking_a_car_given_BOTH_car_park_are_full_with_a_parking_boy(){
+        // Given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot1 = new ParkingLot(  0);
+        ParkingLot parkingLot2 = new ParkingLot(  1);
+        parkingLot1.setCapacity(0);
+        parkingLot2.setCapacity(0);
+        //When and Return
+        assertThrows(ParkingLotFullException.class, () -> parkingBoy.park(new Car()), "No available position");
     }
 }
