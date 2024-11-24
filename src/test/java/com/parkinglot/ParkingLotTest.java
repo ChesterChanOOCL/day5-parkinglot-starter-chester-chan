@@ -244,5 +244,21 @@ public class ParkingLotTest {
         assertFalse(lot2.getParkRecord().containsKey(ticket));
     }
 
+    @Test
+    void should_park_in_second_lot_when_it_has_more_empty_positions() {
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ParkingLot lot1 = new ParkingLot(1);
+        ParkingLot lot2 = new ParkingLot(2);
+        smartParkingBoy.getParkingLotList().add(lot1);
+        smartParkingBoy.getParkingLotList().add(lot2);
+
+        Car car = new Car();
+        lot1.park(new Car());
+        Ticket ticket = smartParkingBoy.park(car);
+
+        assertFalse(lot1.getParkRecord().containsKey(ticket));
+        assertTrue(lot2.getParkRecord().containsKey(ticket));
+    }
+
 
 }
