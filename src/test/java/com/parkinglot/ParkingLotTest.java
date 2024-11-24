@@ -290,7 +290,38 @@ public class ParkingLotTest {
         assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(invalidTicket), "Unrecognized parking ticket.");
     }
 
+    @Test
+    void should_throw_exception_for_used_ticket_when_fetch_a_car_given_1_smartParkingBoy_2_parkingLots_1_and_used_ticket() {
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(1);
+        smartParkingBoy.getParkingLotList().add(lot1);
+        smartParkingBoy.getParkingLotList().add(lot2);
 
+        Car car = new Car();
+        Ticket ticket = smartParkingBoy.park(car);
+        smartParkingBoy.fetch(ticket); // Use the ticket
 
+        assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(ticket), "Unrecognized parking ticket.");
+    }
 
+//    @Test
+//    void should_throw_exception_when_park_a_car_given_no_available_position() {
+//        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+//        ParkingLot lot1 = new ParkingLot(0);
+//        ParkingLot lot2 = new ParkingLot(0);
+//        smartParkingBoy.getParkingLotList().add(lot1);
+//        smartParkingBoy.getParkingLotList().add(lot2);
+//
+//        lot1.park(new Car());
+//        lot2.park(new Car());
+//
+//        Car car = new Car();
+//
+//        assertThrows(ParkingLotFullException.class, () -> smartParkingBoy.park(car), "No available position");
+//    }
 }
+
+
+
+
