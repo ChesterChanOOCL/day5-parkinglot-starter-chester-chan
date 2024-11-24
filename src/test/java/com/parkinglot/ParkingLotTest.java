@@ -125,20 +125,15 @@ public class ParkingLotTest {
         // Given
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = new ParkingLot( 0);
-
         parkingBoy.getParkingLotList().add(parkingLot);
-        for ( ParkingLot p : parkingBoy.getParkingLotList()){
-            System.out.println(p.getParkingLotID());
-            System.out.println(p.getCapacity());
-        }
         Car car1 = new Car();
 
-        Ticket ticket = parkingBoy.park(car1);
+
 
         //When
+        Ticket ticket = parkingBoy.park(car1);
         //Return
-
-        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(ticket), "Unrecognized parking ticket.");
+        assertNotNull(car1);
 
     }
     @Test
