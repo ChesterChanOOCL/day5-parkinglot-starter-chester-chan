@@ -23,7 +23,7 @@ public class ParkingLot {
     public Ticket park(Car car) {
         if (!this.isFull()) {
             Ticket ticket = new Ticket(this.parkingLotID);
-            parkRecord.put(ticket, car);
+            this.parkRecord.put(ticket, car);
             availablePosition--;
 
             return ticket;

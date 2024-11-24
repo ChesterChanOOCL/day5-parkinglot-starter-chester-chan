@@ -15,10 +15,8 @@ public class ParkingBoy {
     public Ticket park(Car car){
         for (ParkingLot parkingLot : parkingLotList) {
             if (!parkingLot.isFull()) {
-                Ticket ticket = new Ticket(parkingLot.parkingLotID);
+                Ticket ticket = parkingLot.park(car);
                 ticketList.add(ticket);
-                System.out.println("got in");
-                parkingLot.park(car);
                 return ticket;
             }
         }
@@ -34,12 +32,17 @@ public class ParkingBoy {
     }
 
     public Car fetch(Ticket ticket) {
-
         if (ticketList.contains(ticket)) {
-           Car obtainedCar = parkingLotList.get(ticket.getParkedToID()).fetch(ticket);
+//            System.out.println("Fetching car from lot ID : "+ticket.getParkedToID());
+//            System.out.println(parkingLotList);
+//            System.out.println(ticket.getParkedToID());
+            System.out.println("Boy received ticket: "+ticket);
+            Car obtainedCar = parkingLotList.get(ticket.getParkedToID()).fetch(ticket);
+
             ticketList.remove(ticket);
             return obtainedCar;
+        } else {
+            throw new UnrecognizedTicketException("Unrecognized parking ticket.");
         }
-        throw new UnrecognizedTicketException("Unrecognized parking ticket.");
     }
 }
