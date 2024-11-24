@@ -33,9 +33,6 @@ public class ParkingBoy {
 
     public Car fetch(Ticket ticket) {
         if (ticketList.contains(ticket)) {
-//            System.out.println("Fetching car from lot ID : "+ticket.getParkedToID());
-//            System.out.println(parkingLotList);
-//            System.out.println(ticket.getParkedToID());
             System.out.println("Boy received ticket: "+ticket);
             Car obtainedCar = parkingLotList.get(ticket.getParkedToID()).fetch(ticket);
 
