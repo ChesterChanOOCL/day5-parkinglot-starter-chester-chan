@@ -367,6 +367,55 @@ public class ParkingLotTest {
         assertEquals(car2, superParkingBoy.fetch(ticket2));
     }
 
+    @Test
+    void should_throw_exception_for_unrecognized_ticket_when_fetch_with_invalid_ticket_given_1_superParkingBoy_2_parking_lots() {
+        //Given
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy();
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(1);
+        superParkingBoy.getParkingLotList().add(lot1);
+        superParkingBoy.getParkingLotList().add(lot2);
+
+        Ticket invalidTicket = new Ticket(999);
+
+        //When and Return
+        assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(invalidTicket), "Unrecognized parking ticket.");
+    }
+
+    @Test
+    void should_throw_exception_for_used_ticket_when_fetch_with_used_ticket_given_1_superParkingBoy_2_parking_lots() {
+        //Given
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy();
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(1);
+        superParkingBoy.getParkingLotList().add(lot1);
+        superParkingBoy.getParkingLotList().add(lot2);
+
+        Car car = new Car();
+        Ticket ticket = superParkingBoy.park(car);
+        //When
+        superParkingBoy.fetch(ticket);
+        //Return
+        assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(ticket), "Unrecognized parking ticket.");
+    }
+
+    @Test
+    void should_throw_exception_when_park_a_car_given_2_parkingLots_WithNOAvailable_position() {
+        //Given
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy();
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(0);
+        superParkingBoy.getParkingLotList().add(lot1);
+        superParkingBoy.getParkingLotList().add(lot2);
+
+        lot1.setCapacity(0);
+        lot2.setCapacity(0);
+        Car car = new Car();
+
+        //When and Return
+        assertThrows(ParkingLotFullException.class, () -> superParkingBoy.park(car), "No available position");
+    }
+
 }
 
 
