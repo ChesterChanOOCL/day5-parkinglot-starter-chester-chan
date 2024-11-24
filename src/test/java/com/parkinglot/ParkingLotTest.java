@@ -320,6 +320,27 @@ public class ParkingLotTest {
 
         assertThrows(ParkingLotFullException.class, () -> smartParkingBoy.park(car), "No available position");
     }
+
+    @Test
+    void should_park_in_lot_with_highest_available_position_rate_when_parkingTWOCar_with_1_SuperParkingBoy_2Car_2_parkingLots() {
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy();
+        ParkingLot lot1 = new ParkingLot(1);
+        ParkingLot lot2 = new ParkingLot(2);
+        superParkingBoy.getParkingLotList().add(lot1);
+        superParkingBoy.getParkingLotList().add(lot2);
+
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        Ticket ticket1 = superParkingBoy.park(car1);
+        assertTrue(lot1.getParkRecord().containsKey(ticket1));
+        assertFalse(lot2.getParkRecord().containsKey(ticket1));
+
+        Ticket ticket2 = superParkingBoy.park(car2);
+        assertFalse(lot1.getParkRecord().containsKey(ticket2));
+        assertTrue(lot2.getParkRecord().containsKey(ticket2));
+    }
+
 }
 
 
