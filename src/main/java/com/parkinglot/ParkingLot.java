@@ -11,7 +11,7 @@ public class ParkingLot {
 
     public ParkingLot(int parkingLotID) {
         this.capacity = 3; ;
-        this.availablePosition = 10;
+        this.availablePosition = 3;
         this.parkRecord = new HashMap<>();
         this.parkingLotID = parkingLotID;
     }
@@ -23,7 +23,11 @@ public class ParkingLot {
     public Ticket park(Car car) {
         if (!this.isFull()) {
             Ticket ticket = new Ticket(this.parkingLotID);
+            System.out.println("Parking Lot parked given ticket:  "+ticket);
             this.parkRecord.put(ticket, car);
+            for (Map.Entry<Ticket, Car> entry : parkRecord.entrySet()) {
+                System.out.println("Right after parked by lot : Ticket: " + entry.getKey() + ", Car: " + entry.getValue());
+            }
             availablePosition--;
 
             return ticket;
@@ -37,6 +41,10 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
+        System.out.println("Parking Lot fetching given ticket:  "+ticket);
+        for (Map.Entry<Ticket, Car> entry : parkRecord.entrySet()) {
+            System.out.println("Ticket: " + entry.getKey() + ", Car: " + entry.getValue());
+        }
         if (parkRecord.get(ticket) == null) {
             throw new UnrecognizedTicketException("Unrecognized parking ticket.");
         }
