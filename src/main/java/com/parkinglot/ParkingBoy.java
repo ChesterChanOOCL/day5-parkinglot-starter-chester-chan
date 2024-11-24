@@ -31,6 +31,9 @@ public class ParkingBoy {
         this.parkingLotList = parkingLotList;
     }
 
+    public List<Ticket> getTicketList() {
+        return ticketList;
+    }
     public Car fetch(Ticket ticket) {
         if (ticketList.contains(ticket)) {
             System.out.println("Boy received ticket: "+ticket);

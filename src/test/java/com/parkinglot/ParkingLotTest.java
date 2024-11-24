@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ParkingLotTest {
@@ -230,4 +229,20 @@ public class ParkingLotTest {
         //When and Return
         assertThrows(ParkingLotFullException.class, () -> parkingBoy.park(new Car()), "No available position");
     }
+    @Test
+    void should_park_in_first_lot_when_both_have_same_empty_positions() {
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ParkingLot lot1 = new ParkingLot(1);
+        ParkingLot lot2 = new ParkingLot(2);
+        smartParkingBoy.getParkingLotList().add(lot1);
+        smartParkingBoy.getParkingLotList().add(lot2);
+
+        Car car = new Car();
+        Ticket ticket = smartParkingBoy.park(car);
+
+        assertTrue(lot1.getParkRecord().containsKey(ticket));
+        assertFalse(lot2.getParkRecord().containsKey(ticket));
+    }
+
+
 }
