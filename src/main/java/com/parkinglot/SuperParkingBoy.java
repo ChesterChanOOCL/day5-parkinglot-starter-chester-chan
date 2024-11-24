@@ -15,4 +15,17 @@ public class SuperParkingBoy extends ParkingBoy {
         }
         throw new ParkingLotFullException("No available position");
     }
+    private ParkingLot selectParkingLot() {
+        ParkingLot bestLot = null;
+        double maxAvailableRate = -1;
+
+        for (ParkingLot lot : getParkingLotList()) {
+            double availableRate = (double) lot.getAvailablePosition() / lot.getCapacity();
+            if (availableRate > maxAvailableRate) {
+                maxAvailableRate = availableRate;
+                bestLot = lot;
+            }
+        }
+        return bestLot;
+    }
 }
