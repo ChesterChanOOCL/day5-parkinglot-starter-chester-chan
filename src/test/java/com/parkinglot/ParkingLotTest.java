@@ -323,6 +323,7 @@ public class ParkingLotTest {
 
     @Test
     void should_park_in_lot_with_highest_available_position_rate_when_parkingTWOCar_with_1_SuperParkingBoy_2Car_2_parkingLots() {
+        //Given
         SuperParkingBoy superParkingBoy = new SuperParkingBoy();
         ParkingLot lot1 = new ParkingLot(1);
         ParkingLot lot2 = new ParkingLot(2);
@@ -332,13 +333,38 @@ public class ParkingLotTest {
         Car car1 = new Car();
         Car car2 = new Car();
 
+        //When
         Ticket ticket1 = superParkingBoy.park(car1);
+        //Return
         assertTrue(lot1.getParkRecord().containsKey(ticket1));
         assertFalse(lot2.getParkRecord().containsKey(ticket1));
+
 
         Ticket ticket2 = superParkingBoy.park(car2);
         assertFalse(lot1.getParkRecord().containsKey(ticket2));
         assertTrue(lot2.getParkRecord().containsKey(ticket2));
+    }
+
+    @Test
+    void should_return_right_car_with_each_ticket_when_park_2_cars_given_1_superParkingBoy_2_parkingLots() {
+
+        //Given
+        SuperParkingBoy superParkingBoy = new SuperParkingBoy();
+        ParkingLot lot1 = new ParkingLot(0);
+        ParkingLot lot2 = new ParkingLot(1);
+        superParkingBoy.getParkingLotList().add(lot1);
+        superParkingBoy.getParkingLotList().add(lot2);
+
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        //When
+        Ticket ticket1 = superParkingBoy.park(car1);
+        Ticket ticket2 = superParkingBoy.park(car2);
+
+        //Return
+        assertEquals(car1, superParkingBoy.fetch(ticket1));
+        assertEquals(car2, superParkingBoy.fetch(ticket2));
     }
 
 }
