@@ -3,10 +3,7 @@ package com.parkinglot;
 import java.util.Calendar;
 import java.util.List;
 
-public class SmartParkingBoy extends ParkingBoy {
-
-    public static final String NO_AVAILABLE_POSITION1 = "No available position";
-
+public class SmartParkingBoy extends ParkingBoy implements ParkingStrategy {
 
     public SmartParkingBoy() {
         super();
@@ -20,7 +17,7 @@ public class SmartParkingBoy extends ParkingBoy {
             this.getTicketList().add(ticket);
             return ticket;
         }
-        throw new ParkingLotFullException(NO_AVAILABLE_POSITION1);
+        throw new ParkingLotFullException(NO_AVAILABLE_POSITION);
     }
 
 

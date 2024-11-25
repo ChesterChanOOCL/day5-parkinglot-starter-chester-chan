@@ -241,6 +241,7 @@ public class ParkingLotTest {
         smartParkingBoy.getParkingLotList().add(lot2);
 
         Car car = new Car();
+        //When and Return
         Ticket ticket = smartParkingBoy.park(car);
 
         assertTrue(lot1.getParkRecord().containsKey(ticket));
@@ -257,6 +258,7 @@ public class ParkingLotTest {
 
         Car car = new Car();
         lot1.park(new Car());
+        //When and Return
         Ticket ticket = smartParkingBoy.park(car);
 
         assertFalse(lot1.getParkRecord().containsKey(ticket));
@@ -273,6 +275,7 @@ public class ParkingLotTest {
 
         Car car1 = new Car();
         Car car2 = new Car();
+        //When and Return
         Ticket ticket1 = smartParkingBoy.park(car1);
         Ticket ticket2 = smartParkingBoy.park(car2);
 
@@ -289,7 +292,7 @@ public class ParkingLotTest {
         smartParkingBoy.getParkingLotList().add(lot2);
 
         Ticket invalidTicket = new Ticket(999);
-
+        //When and Return
         assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(invalidTicket), UNRECOGNIZED_PARKING_TICKET);
     }
 
@@ -304,7 +307,7 @@ public class ParkingLotTest {
         Car car = new Car();
         Ticket ticket = smartParkingBoy.park(car);
         smartParkingBoy.fetch(ticket); // Use the ticket
-
+        //When and Return
         assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
     }
 
@@ -320,7 +323,7 @@ public class ParkingLotTest {
         lot2.setCapacity(0);
 
         Car car = new Car();
-
+        //When and Return
         assertThrows(ParkingLotFullException.class, () -> smartParkingBoy.park(car), NO_AVAILABLE_POSITION);
     }
 
@@ -336,12 +339,11 @@ public class ParkingLotTest {
         Car car1 = new Car();
         Car car2 = new Car();
 
-        //When
+        //When and Return
         Ticket ticket1 = superParkingBoy.park(car1);
-        //Return
+
         assertTrue(lot1.getParkRecord().containsKey(ticket1));
         assertFalse(lot2.getParkRecord().containsKey(ticket1));
-
 
         Ticket ticket2 = superParkingBoy.park(car2);
         assertFalse(lot1.getParkRecord().containsKey(ticket2));

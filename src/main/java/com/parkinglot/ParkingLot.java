@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    public static final String UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket.";
     private int capacity ;
     private Map<Ticket,Car> parkRecord;
     private int availablePosition;

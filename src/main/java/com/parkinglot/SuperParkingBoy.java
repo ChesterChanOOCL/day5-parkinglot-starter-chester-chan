@@ -2,7 +2,6 @@ package com.parkinglot;
 
 public class SuperParkingBoy extends ParkingBoy {
 
-
     public SuperParkingBoy() {
         super();
     }
