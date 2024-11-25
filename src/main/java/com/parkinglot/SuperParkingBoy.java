@@ -1,6 +1,8 @@
 package com.parkinglot;
 
 public class SuperParkingBoy extends ParkingBoy {
+
+
     public SuperParkingBoy() {
         super();
     }
@@ -13,7 +15,7 @@ public class SuperParkingBoy extends ParkingBoy {
             getTicketList().add(ticket);
             return ticket;
         }
-        throw new ParkingLotFullException("No available position");
+        throw new ParkingLotFullException(NO_AVAILABLE_POSITION);
     }
     private ParkingLot selectParkingLot() {
         ParkingLot bestLot = null;

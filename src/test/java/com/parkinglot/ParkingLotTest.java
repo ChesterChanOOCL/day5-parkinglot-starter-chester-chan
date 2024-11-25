@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ParkingLotTest {
+    public static final String NO_AVAILABLE_POSITION = "No available position";
+    public static final String UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket.";
+
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     @Test
     public void should_return_ticket_when_park_given_a_car(){
@@ -71,7 +74,7 @@ public class ParkingLotTest {
         Ticket ticket1 = null;
 
         //When and Return
-        assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetch(ticket1), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetch(ticket1), UNRECOGNIZED_PARKING_TICKET);
     }
     @Test
     public void should_return_null_with_err_msg_when_fetch_the_car_given_the_ticket_is_used(){
@@ -83,7 +86,7 @@ public class ParkingLotTest {
         Ticket ticket1 = parkingLot.park(car1);
         //When
         Car fetchedCar1 = parkingLot.fetch(ticket1);
-        assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetch(ticket1), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> parkingLot.fetch(ticket1), UNRECOGNIZED_PARKING_TICKET);
     }
 
     @Test
@@ -97,7 +100,7 @@ public class ParkingLotTest {
         }
 
         //When and Return
-        assertThrows(ParkingLotFullException.class, () -> parkingLot.park(new Car()), "No available position");
+        assertThrows(ParkingLotFullException.class, () -> parkingLot.park(new Car()), NO_AVAILABLE_POSITION);
     }
     private String systemOut() {
         return outContent.toString();
@@ -172,7 +175,7 @@ public class ParkingLotTest {
         Ticket invalidTicket = new Ticket(3);
 
         //When and return
-        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(invalidTicket), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(invalidTicket), UNRECOGNIZED_PARKING_TICKET);
 
     }
     @Test
@@ -188,7 +191,7 @@ public class ParkingLotTest {
         Car fetchedCar1 = parkingBoy.fetch(ticket1);
 
         // Then
-        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(ticket1), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> parkingBoy.fetch(ticket1), UNRECOGNIZED_PARKING_TICKET);
     }
     @Test
     public void should_return_null_when_parking_a_car_given_the_car_park_is_full_and_a_parking_boy(){
@@ -200,7 +203,7 @@ public class ParkingLotTest {
             parkingBoy.park(new Car());
         }
         //When and Return
-        assertThrows(ParkingLotFullException.class, () -> parkingBoy.park(new Car()), "No available position");
+        assertThrows(ParkingLotFullException.class, () -> parkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
     }
     // Story 4
     @Test
@@ -227,7 +230,7 @@ public class ParkingLotTest {
         parkingLot1.setCapacity(0);
         parkingLot2.setCapacity(0);
         //When and Return
-        assertThrows(ParkingLotFullException.class, () -> parkingBoy.park(new Car()), "No available position");
+        assertThrows(ParkingLotFullException.class, () -> parkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
     }
     @Test
     void should_park_in_first_lot_when_both_have_same_empty_positions() {
@@ -287,7 +290,7 @@ public class ParkingLotTest {
 
         Ticket invalidTicket = new Ticket(999);
 
-        assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(invalidTicket), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(invalidTicket), UNRECOGNIZED_PARKING_TICKET);
     }
 
     @Test
@@ -302,7 +305,7 @@ public class ParkingLotTest {
         Ticket ticket = smartParkingBoy.park(car);
         smartParkingBoy.fetch(ticket); // Use the ticket
 
-        assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(ticket), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> smartParkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
     }
 
     @Test
@@ -318,7 +321,7 @@ public class ParkingLotTest {
 
         Car car = new Car();
 
-        assertThrows(ParkingLotFullException.class, () -> smartParkingBoy.park(car), "No available position");
+        assertThrows(ParkingLotFullException.class, () -> smartParkingBoy.park(car), NO_AVAILABLE_POSITION);
     }
 
     @Test
@@ -379,7 +382,7 @@ public class ParkingLotTest {
         Ticket invalidTicket = new Ticket(999);
 
         //When and Return
-        assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(invalidTicket), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(invalidTicket), UNRECOGNIZED_PARKING_TICKET);
     }
 
     @Test
@@ -396,7 +399,7 @@ public class ParkingLotTest {
         //When
         superParkingBoy.fetch(ticket);
         //Return
-        assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(ticket), "Unrecognized parking ticket.");
+        assertThrows(UnrecognizedTicketException.class, () -> superParkingBoy.fetch(ticket), UNRECOGNIZED_PARKING_TICKET);
     }
 
     @Test
@@ -413,7 +416,7 @@ public class ParkingLotTest {
         Car car = new Car();
 
         //When and Return
-        assertThrows(ParkingLotFullException.class, () -> superParkingBoy.park(car), "No available position");
+        assertThrows(ParkingLotFullException.class, () -> superParkingBoy.park(car), NO_AVAILABLE_POSITION);
     }
 
 }

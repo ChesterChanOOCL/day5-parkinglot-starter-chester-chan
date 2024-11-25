@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {
+    public static final String NO_AVAILABLE_POSITION = "No available position";
+    public static final String UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket.";
     private List<Ticket> ticketList = new ArrayList<>();
     private List<ParkingLot> parkingLotList = new ArrayList<>();
 
@@ -20,7 +22,7 @@ public class ParkingBoy {
                 return ticket;
             }
         }
-        throw new ParkingLotFullException("No available position");
+        throw new ParkingLotFullException(NO_AVAILABLE_POSITION);
     }
 
     public List<ParkingLot> getParkingLotList() {
@@ -42,7 +44,7 @@ public class ParkingBoy {
             ticketList.remove(ticket);
             return obtainedCar;
         } else {
-            throw new UnrecognizedTicketException("Unrecognized parking ticket.");
+            throw new UnrecognizedTicketException(UNRECOGNIZED_PARKING_TICKET);
         }
     }
 }

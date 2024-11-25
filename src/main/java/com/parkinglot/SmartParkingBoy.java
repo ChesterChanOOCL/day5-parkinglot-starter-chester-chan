@@ -5,6 +5,9 @@ import java.util.List;
 
 public class SmartParkingBoy extends ParkingBoy {
 
+    public static final String NO_AVAILABLE_POSITION1 = "No available position";
+
+
     public SmartParkingBoy() {
         super();
     }
@@ -13,13 +16,11 @@ public class SmartParkingBoy extends ParkingBoy {
     public Ticket park(Car car) {
         ParkingLot selectedLot = selectParkingLot();
         if (selectedLot != null) {
-
             Ticket ticket = selectedLot.park(car);
-            System.out.println("Smart park boy generated ticket "+ticket);
             this.getTicketList().add(ticket);
             return ticket;
         }
-        throw new ParkingLotFullException("No available position");
+        throw new ParkingLotFullException(NO_AVAILABLE_POSITION1);
     }
 
 
@@ -44,10 +45,10 @@ public class SmartParkingBoy extends ParkingBoy {
             getTicketList().remove(ticket);
             return obtainedCar;
         } else {
-            throw new UnrecognizedTicketException("Unrecognized parking ticket.");
+            throw new UnrecognizedTicketException(UNRECOGNIZED_PARKING_TICKET);
         }
     }
-    //getter of ticketlist that just return the ticketlist
+
     @Override
     public List<Ticket> getTicketList() {
         return super.getTicketList();
